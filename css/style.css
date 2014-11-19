@@ -1,0 +1,37 @@
+body{
+	background-color: #1E90FF;
+}
+
+content{
+	width: 400px;
+	margin: 0px auto auto auto;
+}
+
+#gameBoard{
+	width: 400px;
+	height: 600px;
+	position: relative;
+}
+
+#gameCanvas{
+	background-color: yellow;
+}
+
+/*Menu*/
+#mainMenuWrapper{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
+#mainMenu ul{
+	list-style: none;
+	width: 100px;
+}
+
+/*Menu Entrys*/
+#mainMenu ul li{
+	border: 1px dotted black;
+	cursor: pointer;
+	width: 100%;
+}
