@@ -1,22 +1,18 @@
 $(function() {
-	$( "#mainMenu" ).on( "click", ".modeSelector", function() {
-		var process = $(this).data("process");
-		switch(process){
-			case "single":
-				startSinglePlayer();
-			break;
-			case "multi":
-				startMultiPlayer();
-			break;
-			case "highscore":
-				showHighscore();
-			break;
-		}
-	});
-});
+	$("#mainMenu").on( "click", "#buttonSingle", function () {
+        startSinglePlayer()
+    });
+    $("#mainMenu").on( "click", "#buttonMulti", function () {
+        startMultiPlayer()
+    });
+    $("#mainMenu").on( "click", "#buttonHighscore", function () {
+        showHighscore()
+    });
+
+
 
 function startSinglePlayer(){
-alert("singeplayer");
+alert("singleplayer");
 //Todo:
 //fadeout menu
 //fadein playerName + Start Button
@@ -33,3 +29,5 @@ function showHighscore(){
 alert("highscore");
 //load highscore from server
 }
+
+});

@@ -7,9 +7,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="keywords" content="">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link href="css/style.css" type="text/css" rel="stylesheet">
-	<script language="javascript" type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
-	<script language="javascript" type="text/javascript" src="js/game.js"></script>
+
 </head>
 
 <body>
@@ -21,14 +21,19 @@
 			<canvas id="gameCanvas" width="400" height="600"></canvas>
 			<div id="mainMenuWrapper">
 				<div id="mainMenu">
-					<ul>
-						<li class="modeSelector" data-process="single">Singleplayer</li>
-						<li class="modeSelector" data-process="multi">Multiplayer</li>
-						<li class="modeSelector" data-process="highscore">Highscore</li>
-					</ul>
+					<p>
+						<button id="buttonSingle" type="button" class="btn btn-primary btn-lg modeSelector"> Singleplayer</button>
+						<button id="buttonMulti" type="button" class="btn btn-primary btn-lg modeSelector"> Multiplayer</button>
+						<button id="buttonHighscore" type="button" class="btn btn-primary btn-lg modeSelector"> Highscore</button>
+					</p>
 				</div>
 			</div>
 		</div>
 	</content>
+
+
+    <script src="js/bootstrap.js"></script>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/game.js"></script>
 </body>
 </html>
