@@ -1,10 +1,19 @@
 body{
-	background-color: #1E90FF;
+	
 }
 
 content{
 	width: 400px;
-	margin: 0px auto auto auto;
+	margin: 20px auto;
+}
+
+#wrapper {
+	margin: 0 auto 50px;
+    width: 400px;
+}
+
+h1 {
+	text-align: center;
 }
 
 #gameBoard{
@@ -14,7 +23,11 @@ content{
 }
 
 #gameCanvas{
-	background-color: yellow;
+	background-color: #eaeaea;
+	-webkit-border-radius: 5px 5px 5px 5px;
+border-radius: 5px 5px 5px 5px;
+-webkit-box-shadow: 0 0 5px 2px #A3A3A3;
+box-shadow: 0 0 5px 2px #A3A3A3;
 }
 
 /*Menu*/
