@@ -1,3 +1,6 @@
+var colors = new Array("Red","Blue","Green","Yellow","Indigo","Orange");
+var codeArray = new Array();
+var numPegs = 4;
 $(function() {
 	$("#mainMenu").on( "click", "#buttonSingle", function () {
         startSinglePlayer()
@@ -15,6 +18,12 @@ function startSinglePlayer(){
 //fadeout menu
 $("#mainMenuWrapper").fadeOut(300, function(){
 	drawGameBoard();
+	/*
+		calculate random colors
+	*/
+	for(var i = 0; i < numPegs; i++){
+		codeArray[i] = colors[Math.floor((Math.random()*6))];
+	}
 });
 }
 
@@ -31,11 +40,5 @@ alert("highscore");
 }
 
 function drawGameBoard(){
-	var canvas = document.getElementById("gameCanvas");
-	var ctx = canvas.getContext('2d');
-	var img = new Image;
-	img.onload = function(){
-	  ctx.drawImage(img,0,0); // Or at whatever offset you like
-	};
-	img.src = "img/canvas/gameBoard.png";
+	//fadeIn all divs for the gameboard
 }
