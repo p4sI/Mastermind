@@ -22,18 +22,24 @@ h1 {
 	position: relative;
 }
 
-/*Menu*/
+/* ============= Menu ============ */
+
+#button_area {
+	margin: 0 0 10px 0;
+	
+}
+
+
 #mainMenuWrapper{
 	width: 400px;
 	height: 600px;
 	position: absolute;
-	top: 0px;
-	left: 0px;
-	background-color: #eaeaea;
+	
+	border: 1px solid #eaeaea;
+	background-color: #fff;
 	-webkit-border-radius: 5px 5px 5px 5px;
 	border-radius: 5px 5px 5px 5px;
-	-webkit-box-shadow: 0 0 5px 2px #A3A3A3;
-	box-shadow: 0 0 5px 2px #A3A3A3;
+	
 }
 
 #mainMenu ul{
@@ -46,4 +52,59 @@ h1 {
 	border: 1px dotted black;
 	cursor: pointer;
 	width: 100%;
+}
+
+/* ============= default codepegs ============ */
+#default_codepegs {
+	border-bottom: 1px solid #eaeaea;
+    height: 50px;
+    margin: 10px auto;
+    padding: 0;
+    width: 360px;
+}
+
+
+#position_yellow , #position_black , #position_red , #position_blue , #position_green , #position_aqua {
+	/*background-color: #f7f1f1;*/
+    float: left;
+    height: 40px;
+    margin: 0 10px;
+    width: 40px;
+    }
+    
+.codepeg_circle {
+	border: 1px solid #eaeaea;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+
+.codepeg_yellow {
+	background-color: yellow;
+   
+}
+
+.codepeg_black {
+	background-color: black;
+    
+}
+
+.codepeg_red {
+	background-color: red;
+    
+}
+
+.codepeg_blue {
+	background-color: blue;
+    
+}
+
+.codepeg_green {
+	background-color: green;
+    
+}
+
+.codepeg_aqua {
+	background-color: aqua;
+    
 }

@@ -11,6 +11,10 @@ $(function() {
     $("#mainMenu").on( "click", "#buttonHighscore", function () {
         showHighscore()
     });
+    
+    
+    
+    $( ".codepeg_yellow" ).draggable();
 });
 
 
@@ -42,3 +46,6 @@ alert("highscore");
 function drawGameBoard(){
 	//fadeIn all divs for the gameboard
 }
+
+
+
