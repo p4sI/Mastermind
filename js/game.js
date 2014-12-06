@@ -14,7 +14,8 @@ $(function() {
     
     
     
-    $( ".codepeg_yellow" ).draggable();
+    $( ".codepeg_circle" ).draggable({ revert: "invalid" });
+    $( "#playing_rows").droppable();
 });
 
 
