@@ -111,8 +111,7 @@ h1 {
 
 /* ============= playing rows ============ */
 #playing_rows {
-    border-bottom: 1px solid #eaeaea;
-    height: 500px;
+    height: 520px;
     margin: 10px auto;
     padding: 0;
     width: 380px;

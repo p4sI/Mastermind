@@ -14,10 +14,35 @@ $(function() {
     
     
     
-    $( ".codepeg_circle" ).draggable({ revert: "invalid" });
-    $( "#playing_rows").droppable();
+    $( ".codepeg_circle" ).draggable({
+        revert: "invalid",
+        helper: "clone"
+    });
+    $( "#playing_rows").droppable({
+        drop: function(event, ui) {
+            checkDroppedColor(ui);
+        }
+    });
 });
 
+function checkDroppedColor(ui) {
+    var classList = ui.draggable.context.classList;
+    if (classList.contains("codepeg_yellow")){
+        $("#playing_rows").css('background-color','yellow');
+    }else if (classList.contains("codepeg_black")){
+        $("#playing_rows").css('background-color','black');
+    }else if (classList.contains("codepeg_red")){
+        $("#playing_rows").css('background-color','red');
+    }else if (classList.contains("codepeg_blue")){
+        $("#playing_rows").css('background-color','blue');
+    }else if (classList.contains("codepeg_green")){
+        $("#playing_rows").css('background-color','green');
+    }else if (classList.contains("codepeg_aqua")){
+        $("#playing_rows").css('background-color','aqua');
+    }
+
+
+}
 
 function startSinglePlayer(){
 //fadeout menu
