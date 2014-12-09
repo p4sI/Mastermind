@@ -42,7 +42,7 @@ function checkResult(){
     // tbd
 
     // remove the droppable class from the current row
-    $("#codepeg_rows").children(".ui-droppable").removeClass("ui-droppable");
+    $("#codepeg_rows").find(".ui-droppable").droppable("disable");
 
     // get to the next round
     nextRound();
