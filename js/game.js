@@ -1,44 +1,69 @@
 var colors = new Array("Red","Blue","Green","Yellow","Indigo","Orange");
 var codeArray = new Array();
 var numPegs = 4;
+var round = 0;
 $(function() {
-	$("#mainMenu").on( "click", "#buttonSingle", function () {
-        startSinglePlayer()
+	$("#buttonSingle").on( "click", function () {
+        startSinglePlayer();
     });
-    $("#mainMenu").on( "click", "#buttonMulti", function () {
-        startMultiPlayer()
+    $("#buttonMulti").on( "click", function () {
+        startMultiPlayer();
     });
-    $("#mainMenu").on( "click", "#buttonHighscore", function () {
-        showHighscore()
+    $("#buttonHighscore").on( "click", function () {
+        showHighscore();
     });
-    
-    
+    $("#buttonCheckResult").on( "click", function () {
+        checkResult();
+    });
+
+    //$("#gameBoard").fadeOut(0);
     
     $( ".codepeg_circle" ).draggable({
         revert: "invalid",
         helper: "clone"
     });
-    $( "#codepeg_rows_1_pos_1_circle_1").droppable({
-        drop: function(event, ui) {
-            checkDroppedColor(ui);
-        }
-    });
+
 });
 
-function checkDroppedColor(ui) {
+function nextRound(){
+    round++;
+    var className = ".codepeg_rows_" + round;
+    $(className).droppable({
+        drop: function(event, ui) {
+            checkDroppedColor(ui, this);
+        }
+    });
+
+
+}
+
+function checkResult(){
+    // check if the color matches the code...
+    // tbd
+
+    // remove the droppable class from the current row
+    $("#codepeg_rows").children(".ui-droppable").removeClass("ui-droppable");
+
+    // get to the next round
+    nextRound();
+
+}
+
+function checkDroppedColor(ui, that) {
     var classList = ui.draggable.context.classList;
+
     if (classList.contains("codepeg_yellow")){
-        $("#codepeg_rows_1_pos_1_circle_1").css('background-color','yellow');
+        $(that).css('background-color','yellow');
     }else if (classList.contains("codepeg_black")){
-        $("#codepeg_rows_1_pos_1_circle_1").css('background-color','black');
+        $(that).css('background-color','black');
     }else if (classList.contains("codepeg_red")){
-        $("#codepeg_rows_1_pos_1_circle_1").css('background-color','red');
+        $(that).css('background-color','red');
     }else if (classList.contains("codepeg_blue")){
-        $("#codepeg_rows_1_pos_1_circle_1").css('background-color','blue');
+        $(that).css('background-color','blue');
     }else if (classList.contains("codepeg_green")){
-        $("#codepeg_rows_1_pos_1_circle_1").css('background-color','green');
+        $(that).css('background-color','green');
     }else if (classList.contains("codepeg_aqua")){
-        $("#codepeg_rows_1_pos_1_circle_1").css('background-color','aqua');
+        $(that).css('background-color','aqua');
     }
 
 
@@ -46,8 +71,9 @@ function checkDroppedColor(ui) {
 
 function startSinglePlayer(){
 //fadeout menu
-$("#mainMenuWrapper").fadeOut(300, function(){
+$("#gameBoard").fadeIn(300, function(){
 	drawGameBoard();
+    nextRound();
 	/*
 		calculate random colors
 	*/
