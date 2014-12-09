@@ -73,7 +73,7 @@ h1 {
     }
     
 .codepeg_circle {
-	border: 1px solid #eaeaea;
+	border: 1px solid #ccc;
     border-radius: 50%;
     height: 40px;
     width: 40px;
@@ -114,5 +114,44 @@ h1 {
     height: 520px;
     margin: 10px auto;
     padding: 0;
-    width: 380px;
+    width: 360px;
+}
+
+#codepeg_rows {
+	border-right: 1px solid #ccc;
+    float: left;
+    height: 520px;
+    width: 270px;
+    
+}
+
+#keypeg_rows {
+	background-color: #a4d4f3;
+	float: left;
+    height: 520px;
+    margin: 0 10px;
+    width: 70px;
+}
+
+#codepeg_rows_1_pos_1 {
+	
+}
+
+.codepeg_circle_default {
+	border: 1px solid #ccc;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+
+.codepeg_rows_position_default {
+	height: 40px;
+    margin: 10px 0;
+    width: 240px;
+}
+
+.codepeg_position_default {
+	float: left;
+    margin: 0 10px;
+    width: 40px;
 }

@@ -18,7 +18,7 @@ $(function() {
         revert: "invalid",
         helper: "clone"
     });
-    $( "#playing_rows").droppable({
+    $( "#codepeg_rows_1_pos_1_circle_1").droppable({
         drop: function(event, ui) {
             checkDroppedColor(ui);
         }
@@ -28,17 +28,17 @@ $(function() {
 function checkDroppedColor(ui) {
     var classList = ui.draggable.context.classList;
     if (classList.contains("codepeg_yellow")){
-        $("#playing_rows").css('background-color','yellow');
+        $("#codepeg_rows_1_pos_1_circle_1").css('background-color','yellow');
     }else if (classList.contains("codepeg_black")){
-        $("#playing_rows").css('background-color','black');
+        $("#codepeg_rows_1_pos_1_circle_1").css('background-color','black');
     }else if (classList.contains("codepeg_red")){
-        $("#playing_rows").css('background-color','red');
+        $("#codepeg_rows_1_pos_1_circle_1").css('background-color','red');
     }else if (classList.contains("codepeg_blue")){
-        $("#playing_rows").css('background-color','blue');
+        $("#codepeg_rows_1_pos_1_circle_1").css('background-color','blue');
     }else if (classList.contains("codepeg_green")){
-        $("#playing_rows").css('background-color','green');
+        $("#codepeg_rows_1_pos_1_circle_1").css('background-color','green');
     }else if (classList.contains("codepeg_aqua")){
-        $("#playing_rows").css('background-color','aqua');
+        $("#codepeg_rows_1_pos_1_circle_1").css('background-color','aqua');
     }
 
 
