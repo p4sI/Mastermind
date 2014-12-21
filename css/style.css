@@ -39,9 +39,8 @@ h1 {
 	width: 400px;
 	height: 600px;
 	position: absolute;
-	
+	background-color: rgb(225, 176, 141);
 	border: 1px solid #eaeaea;
-	background-color: #fff;
 	-webkit-border-radius: 5px 5px 5px 5px;
 	border-radius: 5px 5px 5px 5px;
 	
@@ -69,7 +68,7 @@ h1 {
 }
 
 
-#position_yellow , #position_black , #position_red , #position_blue , #position_green , #position_aqua {
+#position_yellow , #position_green , #position_red , #position_blue , #position_indigo , #position_orange {
 	/*background-color: #f7f1f1;*/
     float: left;
     height: 40px;
@@ -89,8 +88,8 @@ h1 {
    
 }
 
-.codepeg_black {
-	background-color: black;
+.codepeg_indigo {
+	background-color: indigo;
     
 }
 
@@ -109,8 +108,8 @@ h1 {
     
 }
 
-.codepeg_aqua {
-	background-color: aqua;
+.codepeg_orange {
+	background-color: orange;
     
 }
 

@@ -1,4 +1,4 @@
-var colors = new Array("Red","Blue","Green","Yellow","Indigo","Orange");
+var colors = new Array("rgb(75, 0, 130)","rgb(0, 0, 255)","rgb(0, 128, 0)","rgb(255, 255, 0)","rgb(75, 0, 130)","rgb(255, 165, 0)");
 var codeArray = new Array();
 var numPegs = 4;
 var round = 0;
@@ -38,15 +38,42 @@ function nextRound(){
 }
 
 function checkResult(){
+	var keyPegs = new Array(),
+	lockedIndexesGuess = new Array(),
+	lockedIndexesCode = new Array();
     // check if the color matches the code...
-    // tbd
-
+    $("#codepeg_rows_"+round).children().each(function(index){
+		if($(this).children().eq(0).css("backgroundColor") == codeArray[index]){
+			keyPegs.push("black");
+			lockedIndexesGuess.push(index+1);
+			lockedIndexesCode.push(index);
+		}
+	});
     // remove the droppable class from the current row
     $("#codepeg_rows").find(".ui-droppable").droppable("disable");
-
+	
+	//set the keyPegs
+	setKeyPegs(keyPegs);
+	
     // get to the next round
     nextRound();
 
+}
+
+function setKeyPegs(keyPegs){
+	if(keyPegs.length > 4)
+		alert("Ups, hier hat sich ein Fehler eingeschlichen: Zuviele KeyPegs!");
+	else{
+		$("#keypeg_rows_"+round).children().each(function(index){
+			if(index < keyPegs.length){
+				$(this).children().eq(0).css("backgroundColor",keyPegs[index]);
+			}
+		});
+	}
+	if(keyPegs[0] == "black" && keyPegs[1] == "black" && 
+		keyPegs[2] == "black" && keyPegs[3] == "black"){
+		alert("Korrekt! Du hast "+round+" Versuche gebraucht!");
+	}
 }
 
 function checkDroppedColor(ui, that) {
@@ -54,16 +81,16 @@ function checkDroppedColor(ui, that) {
 
     if (classList.contains("codepeg_yellow")){
         $(that).css('background-color','yellow');
-    }else if (classList.contains("codepeg_black")){
-        $(that).css('background-color','black');
+    }else if (classList.contains("codepeg_indigo")){
+        $(that).css('background-color','indigo');
     }else if (classList.contains("codepeg_red")){
         $(that).css('background-color','red');
     }else if (classList.contains("codepeg_blue")){
         $(that).css('background-color','blue');
     }else if (classList.contains("codepeg_green")){
         $(that).css('background-color','green');
-    }else if (classList.contains("codepeg_aqua")){
-        $(that).css('background-color','aqua');
+    }else if (classList.contains("codepeg_orange")){
+        $(that).css('background-color','orange');
     }
 
 
@@ -80,6 +107,7 @@ $("#gameBoard").fadeIn(300, function(){
 	for(var i = 0; i < numPegs; i++){
 		codeArray[i] = colors[Math.floor((Math.random()*6))];
 	}
+	console.log(codeArray);
 });
 }
 
