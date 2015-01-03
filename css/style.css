@@ -1,5 +1,5 @@
 body{
-	
+	background-color: #f3f3f3;
 }
 
 content{
@@ -19,7 +19,7 @@ h1 {
 #gameBoard{
 	width: 400px;
 	margin: 0 0 10px;
-	height: 600px;
+	height: 690px;
 	position: relative;
 }
 
@@ -37,7 +37,7 @@ h1 {
 
 #mainMenuWrapper{
 	width: 400px;
-	height: 600px;
+	height: 690px;
 	position: absolute;
 	background-color: rgb(225, 176, 141);
 	border: 1px solid #eaeaea;
@@ -56,6 +56,45 @@ h1 {
 	border: 1px dotted black;
 	cursor: pointer;
 	width: 100%;
+}
+
+/* ================= mulit row ================ */
+
+#multi_row{
+	height: 85px;
+    margin: 0 auto;
+    width: 360px;	
+}
+#multi_row_codepeg {
+	float: left;
+    height: 40px;
+    margin: 0 0 10px;
+    width: 255px;
+}
+#multi_row_keypeg {
+	float: left;
+    height: 25px;
+    margin: 10px 0 0;
+    text-align: center;
+    width: 90px;
+}
+.multi_keypeg_position_default{
+	float: left;
+    height: 15px;
+    margin: 0 15px;
+    width: 15px;
+}
+.set_code{
+	margin: 0 0 5px;
+}
+#multi_button {
+	float: right;
+}
+.multi_keypeg_black {
+	background-color: #000;
+}
+.multi_keypeg_white {
+	background-color: #fff;
 }
 
 /* ============= default codepegs ============ */
