@@ -39,7 +39,7 @@ h1 {
 	width: 400px;
 	height: 690px;
 	position: absolute;
-	background-color: rgb(225, 176, 141);
+	background-color: #D2691E;
 	border: 1px solid #eaeaea;
 	-webkit-border-radius: 5px 5px 5px 5px;
 	border-radius: 5px 5px 5px 5px;
@@ -70,13 +70,17 @@ h1 {
     height: 40px;
     margin: 0 0 10px;
     width: 255px;
+    border-radius: 5px 5px 5px 5px;
 }
 #multi_row_keypeg {
-	float: left;
+	float: right;
     height: 25px;
     margin: 10px 0 0;
     text-align: center;
     width: 90px;
+}
+.codepeg_mastercode{
+    display: none;
 }
 .multi_keypeg_position_default{
 	float: left;
