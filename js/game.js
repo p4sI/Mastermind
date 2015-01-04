@@ -10,6 +10,9 @@ var codeArray = new Array();
 var numPegs = 4;
 var round = 0;
 var masterCodeIsSet = false;
+var multiplayer = false;
+var masterCodeViewable = false;
+
 $(function() {
 	$("#buttonSingle").on( "click", function () {
         startSinglePlayer();
@@ -21,6 +24,9 @@ $(function() {
         showHighscore();
     });
     $("#buttonCheckResult").on( "click", function () {
+        $("#buttonCheckResult").prop('disabled', true);
+        $("#buttonMultiNext").prop('disabled', false);
+        $("#buttonSetMasterCode").prop('disabled', false);
         checkResult();
     });
     $("#buttonSetMasterCode").on( "click", function () {
@@ -28,8 +34,28 @@ $(function() {
             setMasterCode();
             masterCodeIsSet = true;
         }else{
-            saveMasterCode();
+            if(round <= 0) {
+                saveMasterCode();
+            }else{
+                toggleMasterCode();
+            }
         }
+    });
+    $("#buttonMultiNext").on( "click", function () {
+        // remove the droppable class from the current row of keypegs
+        $("#keypeg_rows").find(".ui-droppable").droppable("disable");
+
+        // enable the button for the result checking and disable this button
+        $("#buttonCheckResult").prop('disabled', false);
+        $("#buttonMultiNext").prop('disabled', true);
+        $("#buttonSetMasterCode").prop('disabled', true);
+
+        // make the row with the master code dark brown (if forgotten)
+        $("#multi_row_codepeg").css('background-color','#8B4513');
+        $(".codepeg_mastercode").css('display', 'none');
+
+        // and start the next round
+        nextRound();
     });
 
 
@@ -57,27 +83,29 @@ function nextRound(){
 
 }
 
-function checkResult(){
-	var keyPegs = new Array(),
-	lockedIndexesGuess = new Array(),
-	lockedIndexesCode = new Array();
+function checkResult() {
+    var keyPegs = new Array(),
+        lockedIndexesGuess = new Array(),
+        lockedIndexesCode = new Array();
     // check if the color matches the code...
-    $("#codepeg_rows_"+round).children().each(function(index){
-		if($(this).children().eq(0).css("backgroundColor") == codeArray[index]){
-			keyPegs.push("black");
-			lockedIndexesGuess.push(index+1);
-			lockedIndexesCode.push(index);
-		}
-	});
+    $("#codepeg_rows_" + round).children().each(function (index) {
+        if ($(this).children().eq(0).css("backgroundColor") == codeArray[index]) {
+            keyPegs.push("black");
+            lockedIndexesGuess.push(index + 1);
+            lockedIndexesCode.push(index);
+        }
+    });
     // remove the droppable class from the current row
     $("#codepeg_rows").find(".ui-droppable").droppable("disable");
-	
-	//set the keyPegs
-	setKeyPegs(keyPegs);
-	
-    // get to the next round
-    nextRound();
 
+    //set the keyPegs
+    if (multiplayer) {
+        setKeyPegsManually();
+    } else {
+        setKeyPegs(keyPegs);
+        // get to the next round
+        nextRound();
+    }
 }
 
 function setKeyPegs(keyPegs){
@@ -102,6 +130,24 @@ function setKeyPegs(keyPegs){
 
         alert("Spielende. Du hast nach 10 Runden den Code noch nicht erraten!");
     }
+}
+
+function setKeyPegsManually(){
+    var className = ".keypeg_rows_" + round;
+    $(className).droppable({
+        drop: function(event, ui) {
+            var classList = ui.draggable.context.classList;
+
+            if (classList.contains("multi_keypeg_black")){
+                $(this).css('background-color','black');
+            }else if (classList.contains("multi_keypeg_white")) {
+                $(this).css('background-color', 'white');
+            }
+        }
+    });
+
+    $(className).css('background-color','Peru');
+
 }
 
 /*
@@ -217,7 +263,10 @@ function startSinglePlayer(){
  * and shows the 2 extra buttons
  */
 function startMultiPlayer(){
-    //fadeout menu
+    // enable multiplayer modus
+    multiplayer = true;
+
+    // fadeout menu
     $("#button_area_top").fadeOut(0);
 
     // make the codepegs draggable
@@ -226,10 +275,22 @@ function startMultiPlayer(){
         helper: "clone"
     });
 
+    // make the keypegs draghgable
+    $("#multi_row_keypeg_pos_1_circle_1").draggable({
+        revert: "invalid",
+        helper: "clone"
+    });
+    $("#multi_row_keypeg_pos_2_circle_2").draggable({
+        revert: "invalid",
+        helper: "clone"
+    });
+
     // draw the board and fade in the buttons for the multiplayer mode
     $(".codepeg_mastercode").css('display', 'block');
 	drawGameBoard();
     $("#multiplayer_buttons").fadeIn(300);
+    $("#buttonMultiNext").prop('disabled', true);
+    $("#buttonCheckResult").prop('disabled', true);
 
 }
 
@@ -261,6 +322,7 @@ function setMasterCode(){
         }
     });
 
+    $("#buttonSetMasterCode").text('Save the Master Code');
 
 }
 
@@ -269,7 +331,27 @@ function saveMasterCode(){
     $("#multi_row_codepeg").css('background-color','#8B4513');
     $(".codepeg_mastercode").css('display', 'none');
 
+    // change button
+    $("#buttonSetMasterCode").text('Show/Hide Master Code');
+    $("#buttonSetMasterCode").prop('disabled', true);
+
     // start the game for the other player
+    $("#buttonCheckResult").prop('disabled', false);
     nextRound();
 
+}
+
+function toggleMasterCode(){
+    if(masterCodeViewable){
+        masterCodeViewable = false;
+        // make the row with the master code dark brown
+        $("#multi_row_codepeg").css('background-color','#8B4513');
+        $(".codepeg_mastercode").css('display', 'none');
+    }
+    else if(!masterCodeViewable){
+        masterCodeViewable = true;
+        // show the master code and remove the blocking bar
+        $(".codepeg_mastercode").css('display', 'block');
+        $("#multi_row_codepeg").css('background-color','#D2691E');
+    }
 }
