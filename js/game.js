@@ -24,9 +24,11 @@ $(function() {
         showHighscore();
     });
     $("#buttonCheckResult").on( "click", function () {
-        $("#buttonCheckResult").prop('disabled', true);
-        $("#buttonMultiNext").prop('disabled', false);
-        $("#buttonSetMasterCode").prop('disabled', false);
+        if(multiplayer) {
+            $("#buttonCheckResult").prop('disabled', true);
+            $("#buttonMultiNext").prop('disabled', false);
+            $("#buttonSetMasterCode").prop('disabled', false);
+        }
         checkResult();
     });
     $("#buttonSetMasterCode").on( "click", function () {
