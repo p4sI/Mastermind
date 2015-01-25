@@ -86,17 +86,46 @@ function nextRound(){
 }
 
 function checkResult() {
-    var keyPegs = new Array(),
-        lockedIndexesGuess = new Array(),
-        lockedIndexesCode = new Array();
-    // check if the color matches the code...
+    var keyPegs = new Array();
+	var guessArray = new Array();
+	var codeArrayTemp = codeArray.slice();
+	var codePegNotSet = false;
     $("#codepeg_rows_" + round).children().each(function (index) {
-        if ($(this).children().eq(0).css("backgroundColor") == codeArray[index]) {
-            keyPegs.push("black");
-            lockedIndexesGuess.push(index + 1);
-            lockedIndexesCode.push(index);
-        }
-    });
+		if($(this).children().eq(0).css("backgroundColor") != "rgb(255, 255, 255)"){
+			guessArray.push($(this).children().eq(0).css("backgroundColor"));
+		}
+		else{
+			codePegNotSet = true;
+		}	
+	});
+	//all keypegs are set?
+	if(codePegNotSet){
+		alert("bitte alle keypegs setzen");
+	}
+	else{
+	// check if the color matches the code...
+	//black
+	$.each(guessArray,function(index){
+			if(guessArray[index] == codeArrayTemp[index]){
+				keyPegs.push("black");
+				guessArray[index] = 0;
+				codeArrayTemp[index] = 0;
+			}
+	});
+	//white
+	$.each(guessArray,function(index){
+		if(guessArray[index] != 0){
+			$.each(codeArrayTemp,function(index2){
+				if(codeArrayTemp[index2] != 0){
+					if(guessArray[index] == codeArrayTemp[index2]){
+						keyPegs.push("white");
+						guessArray[index] = 0;
+						codeArrayTemp[index2] = 0;
+					}
+				}
+			});
+		}
+	});
     // remove the droppable class from the current row
     $("#codepeg_rows").find(".ui-droppable").droppable("disable");
 
@@ -108,6 +137,7 @@ function checkResult() {
         // get to the next round
         nextRound();
     }
+	}
 }
 
 function setKeyPegs(keyPegs){
