@@ -103,40 +103,54 @@ function checkResult() {
 		alert("bitte alle keypegs setzen");
 	}
 	else{
-	// check if the color matches the code...
-	//black
-	$.each(guessArray,function(index){
-			if(guessArray[index] == codeArrayTemp[index]){
-				keyPegs.push("black");
-				guessArray[index] = 0;
-				codeArrayTemp[index] = 0;
-			}
-	});
-	//white
-	$.each(guessArray,function(index){
-		if(guessArray[index] != 0){
-			$.each(codeArrayTemp,function(index2){
-				if(codeArrayTemp[index2] != 0){
-					if(guessArray[index] == codeArrayTemp[index2]){
-						keyPegs.push("white");
-						guessArray[index] = 0;
-						codeArrayTemp[index2] = 0;
-					}
-				}
-			});
-		}
-	});
-    // remove the droppable class from the current row
-    $("#codepeg_rows").find(".ui-droppable").droppable("disable");
+        // check if the color matches the code...
+        //black
+        $.each(guessArray,function(index){
+                if(guessArray[index] == codeArrayTemp[index]){
+                    keyPegs.push("black");
+                    guessArray[index] = 0;
+                    codeArrayTemp[index] = 0;
+                }
+        });
+        //white
+        $.each(guessArray,function(index){
+            if(guessArray[index] != 0){
+                $.each(codeArrayTemp,function(index2){
+                    if(codeArrayTemp[index2] != 0){
+                        if(guessArray[index] == codeArrayTemp[index2]){
+                            keyPegs.push("white");
+                            guessArray[index] = 0;
+                            codeArrayTemp[index2] = 0;
+                        }
+                    }
+                });
+            }
+        });
+        // remove the droppable class from the current row
+        $("#codepeg_rows").find(".ui-droppable").droppable("disable");
 
-    //set the keyPegs
-    if (multiplayer) {
-        setKeyPegsManually();
-    } else {
-        setKeyPegs(keyPegs);
-        // get to the next round
-        nextRound();
-    }
+        //set the keyPegs
+        if (multiplayer) {
+            setKeyPegsManually();
+        } else {
+            var guessedRight = setKeyPegs(keyPegs);
+            if(guessedRight){
+                toggleMasterCode();
+                alert("Korrekt! Du hast "+round+" Versuche gebraucht!");
+                return;
+            }
+            else if(round >= 10){
+                // show the master code and remove the blocking bar
+                $(".codepeg_mastercode").css('display', 'block');
+                $("#multi_row_codepeg").css('background-color','#D2691E');
+
+                alert("Spielende. Du hast nach 10 Runden den Code noch nicht erraten!");
+                return;
+            }
+
+            // get to the next round
+            nextRound();
+        }
 	}
 }
 
@@ -152,15 +166,11 @@ function setKeyPegs(keyPegs){
 	}
 	if(keyPegs[0] == "black" && keyPegs[1] == "black" && 
 		keyPegs[2] == "black" && keyPegs[3] == "black"){
-		alert("Korrekt! Du hast "+round+" Versuche gebraucht!");
+        return true;
 	}
-
-    if(round >= 10){
-        // show the master code and remove the blocking bar
-        $(".codepeg_mastercode").css('display', 'block');
-        $("#multi_row_codepeg").css('background-color','#D2691E');
-
-        alert("Spielende. Du hast nach 10 Runden den Code noch nicht erraten!");
+    else
+    {
+        return false;
     }
 }
 
