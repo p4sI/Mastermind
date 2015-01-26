@@ -172,7 +172,7 @@ function checkResult() {
                 toggleMasterCode();
                 // change the buttons at the bottom
                 $("#buttonCheckResult").fadeOut(0);
-                $("#buttonsfinishedGame").fadeIn(0);
+                $(".buttonsfinishedGame").css('display', 'inline-block');
                 alert("Korrekt! Du hast "+round+" Versuche gebraucht!");
                 return;
             }
@@ -180,10 +180,10 @@ function checkResult() {
             else if(round >= 10){
                 // show the master code and remove the blocking bar
                 $(".codepeg_mastercode").css('display', 'block');
-                $("#multi_row_codepeg").css('background-color','#D2691E');
+                $("#multi_row_codepeg").css('background-color','#C18553');
                 // change the buttons at the bottom
                 $("#buttonCheckResult").fadeOut(0);
-                $("#buttonsfinishedGame").fadeIn(0);
+                $(".buttonsfinishedGame").css('display', 'inline-block');
 
                 alert("Spielende. Du hast nach 10 Runden den Code noch nicht erraten!");
                 return;
@@ -316,7 +316,7 @@ function startSinglePlayer(){
 
     // change the buttons at the bottom
     $("#buttonCheckResult").fadeIn(0);
-    $("#buttonsfinishedGame").fadeOut(0);
+    $(".buttonsfinishedGame").css('display', 'none');
 
     // make the codepegs draggable
     $( ".codepeg_circle" ).draggable({
@@ -381,7 +381,7 @@ function startMultiPlayer(){
     $("#main_page").fadeOut(0);
     // change the buttons at the bottom
     $("#buttonCheckResult").fadeIn(0);
-    $("#buttonsfinishedGame").fadeOut(0);
+    $(".buttonsfinishedGame").css('display', 'none');
 
     // make the codepegs draggable
     $( ".codepeg_circle" ).draggable({
@@ -400,7 +400,7 @@ function startMultiPlayer(){
     });
 
     // make the codepeg holes transparent
-    $(".codepeg_circle_default").not(".codepeg_mastercode").css('background-color','transparent');
+    $(".codepeg_circle_default, .codepeg_mastercode").css('background-color','transparent');
     //make the keypeg holes transparent
     $(".keypeg_circle_default").not(".multi_keypeg_black, .multi_keypeg_white").css('background-color','transparent');
 
@@ -449,8 +449,10 @@ function setMasterCode(){
             checkDroppedColorMaster(ui, this);
         }
     });
+    $(".codepeg_mastercode").droppable("option", "disabled", false );
 
     $("#buttonSetMasterCode").text('Save the Master Code');
+
 
 }
 
@@ -480,6 +482,6 @@ function toggleMasterCode(){
         masterCodeViewable = true;
         // show the master code and remove the blocking bar
         $(".codepeg_mastercode").css('display', 'block');
-        $("#multi_row_codepeg").css('background-color','#D2691E');
+        $("#multi_row_codepeg").css('background-color','#C18553');
     }
 }
