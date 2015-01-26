@@ -73,6 +73,12 @@ $(function() {
         nextRound();
     });
 
+    document.onkeydown = function(evt) {
+        evt = evt || window.event;
+        if (evt.keyCode == 67) {
+            toggleMasterCode();
+        }
+    };
 
     $("#gameBoard").fadeOut(0);
     $("#button_area_bottom").fadeOut(0);
