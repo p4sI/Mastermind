@@ -13,7 +13,22 @@ var masterCodeIsSet = false;
 var multiplayer = false;
 var masterCodeViewable = false;
 
+ 
+
+
 $(function() {
+	
+	$("#icon_highscore").on("click", function () {
+        showHighscore();
+    });	
+	
+	$( "#icon_game_guide" ).hover(function() {
+		$( ".game_guide" ).css( 'display','block' );
+			},function(){
+			$(".game_guide").css("display","none");	
+	});
+	
+	
 	$("#buttonSingle").on( "click", function () {
         startSinglePlayer();
     });
@@ -291,7 +306,9 @@ function checkDroppedColorMaster(ui, that) {
 function startSinglePlayer(){
     round = 0;
     multiplayer = false;
-
+    
+    //fadein additional_button
+	$("#additional_button").css('display', 'block');
 
     //fadeout menu
     $("#button_area_top").fadeOut(0);
@@ -355,7 +372,9 @@ function startMultiPlayer(){
     masterCodeIsSet = false;
     multiplayer = true;
     masterCodeViewable = false;
-
+	
+	//fadein additional_button
+	$("#additional_button").css('display', 'block');
 
     // fadeout menu
     $("#button_area_top").fadeOut(0);
@@ -421,7 +440,7 @@ function setMasterCode(){
 
     // show the master code and remove the blocking bar
     $(".codepeg_mastercode").css('display', 'block');
-    $("#multi_row_codepeg").css('background-color','#D2691E');
+    //$("#multi_row_codepeg").css('background-color','#D2691E');
     $(".codepeg_mastercode").css('background-color','white');
 
     // make the master code row droppable
