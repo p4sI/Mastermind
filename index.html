@@ -29,6 +29,16 @@
     <div id="wrapper">
         <h1>Mastermind</h1>
 
+        <!-- Main Page -->
+        <div id="main_page">
+            <p>
+                Mastermind ist ein Spiel ...
+                Die Regeln sind ...
+                Viel Spaß!
+            </p>
+        </div>
+
+        <!-- Top Buttons -->
         <div id="button_area_top">
             <div class="btn-group btn-group-justified" role="group" aria-label="...">
                 <div class="btn-group" role="group">
@@ -41,6 +51,26 @@
             </div>
         </div>
 
+        <!-- Highscore Popup Modal -->
+        <div class="modal fade" id="highscoreModal" tabindex="-1" role="dialog" aria-labelledby="Highscore" aria-hidden="true">
+            <div class="modal-dialog modal-mi">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="highscoreModalLabel">Highscore</h4>
+                    </div>
+                    <div id="highscoreModalBody" class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" style="display: none">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GameBoard -->
         <div id="gameBoard">
             <div id="mainMenuWrapper">
                 <div id="default_codepegs">
@@ -490,8 +520,13 @@
                 <button id="buttonCheckResult" type="button" class="btn btn-default">Check Result</button>
             </div>
 
+            <div id="buttonsfinishedGame" class="btn-group" role="group" style="display: none">
+                <button id="buttonNewGame" type="button" class="btn btn-default">New Game</button>
+                <button id="buttonMainMenu" type="button" class="btn btn-default">Main Menu</button>
+            </div>
+
             <div class="btn-group" role="group">
-                <button id="buttonHighscore" type="button" class="btn btn-default">Highscore (coming soon)</button>
+                <button id="buttonHighscore" type="button" class="btn btn-default" data-toggle="modal" data-target="#highscoreModal">Highscore</button>
             </div>
         </div>
     </div>

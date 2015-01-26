@@ -20,9 +20,11 @@ $(function() {
     $("#buttonMulti").on( "click", function () {
         startMultiPlayer();
     });
+    /*
     $("#buttonHighscore").on( "click", function () {
         showHighscore();
     });
+    */
     $("#buttonCheckResult").on( "click", function () {
         if(multiplayer) {
             $("#buttonCheckResult").prop('disabled', true);
@@ -30,6 +32,17 @@ $(function() {
             $("#buttonSetMasterCode").prop('disabled', false);
         }
         checkResult();
+    });
+    $("#buttonNewGame").on("click", function () {
+        if(multiplayer){
+            startMultiPlayer();
+        }
+        else {
+            startSinglePlayer();
+        }
+    });
+    $("#buttonMainMenu").on("click", function () {
+        drawMainMenu();
     });
     $("#buttonSetMasterCode").on( "click", function () {
         if(!masterCodeIsSet) {
@@ -79,10 +92,8 @@ function nextRound(){
             checkDroppedColor(ui, this);
         }
     });
-
+    $(className).droppable( "option", "disabled", false );
     $(className).css('background-color','white');
-
-
 }
 
 function checkResult() {
@@ -132,23 +143,32 @@ function checkResult() {
         //set the keyPegs
         if (multiplayer) {
             setKeyPegsManually();
-        } else {
+        }
+        else {
             var guessedRight = setKeyPegs(keyPegs);
+            // if the result is right -> player won
             if(guessedRight){
                 toggleMasterCode();
+                // change the buttons at the bottom
+                $("#buttonCheckResult").fadeOut(0);
+                $("#buttonsfinishedGame").fadeIn(0);
                 alert("Korrekt! Du hast "+round+" Versuche gebraucht!");
                 return;
             }
+            // if the result is wrong and 10 rounds are played -> player lose
             else if(round >= 10){
                 // show the master code and remove the blocking bar
                 $(".codepeg_mastercode").css('display', 'block');
                 $("#multi_row_codepeg").css('background-color','#D2691E');
+                // change the buttons at the bottom
+                $("#buttonCheckResult").fadeOut(0);
+                $("#buttonsfinishedGame").fadeIn(0);
 
                 alert("Spielende. Du hast nach 10 Runden den Code noch nicht erraten!");
                 return;
             }
 
-            // get to the next round
+            // wrong result -> get to the next round
             nextRound();
         }
 	}
@@ -263,10 +283,23 @@ function checkDroppedColorMaster(ui, that) {
  * also makes the first row droppable
  */
 function startSinglePlayer(){
+    round = 0;
+    multiplayer = false;
+
+
     //fadeout menu
     $("#button_area_top").fadeOut(0);
+    $("#main_page").fadeOut(0);
+
+    // change the buttons at the bottom
+    $("#buttonCheckResult").fadeIn(0);
+    $("#buttonsfinishedGame").fadeOut(0);
 
     // make the codepegs draggable
+    $( ".codepeg_circle" ).draggable({
+        revert: "invalid",
+        helper: "clone"
+    });
     $( ".codepeg_circle" ).draggable({
         revert: "invalid",
         helper: "clone"
@@ -276,6 +309,12 @@ function startSinglePlayer(){
 
     // make the row with the master code dark brown
     $("#multi_row_codepeg").css('background-color','#8B4513');
+    $(".codepeg_mastercode").css('display', 'none');
+
+    // make the codepeg holes transparent
+    $(".codepeg_circle_default").not(".codepeg_mastercode").css('background-color','transparent');
+    //make the keypeg holes transparent
+    $(".keypeg_circle_default").not(".multi_keypeg_black, .multi_keypeg_white").css('background-color','transparent');
 
     // draw the board and fade in the
 	drawGameBoard();
@@ -306,10 +345,18 @@ function startSinglePlayer(){
  */
 function startMultiPlayer(){
     // enable multiplayer modus
+    round = 0;
+    masterCodeIsSet = false;
     multiplayer = true;
+    masterCodeViewable = false;
+
 
     // fadeout menu
     $("#button_area_top").fadeOut(0);
+    $("#main_page").fadeOut(0);
+    // change the buttons at the bottom
+    $("#buttonCheckResult").fadeIn(0);
+    $("#buttonsfinishedGame").fadeOut(0);
 
     // make the codepegs draggable
     $( ".codepeg_circle" ).draggable({
@@ -327,6 +374,11 @@ function startMultiPlayer(){
         helper: "clone"
     });
 
+    // make the codepeg holes transparent
+    $(".codepeg_circle_default").not(".codepeg_mastercode").css('background-color','transparent');
+    //make the keypeg holes transparent
+    $(".keypeg_circle_default").not(".multi_keypeg_black, .multi_keypeg_white").css('background-color','transparent');
+
     // draw the board and fade in the buttons for the multiplayer mode
     $(".codepeg_mastercode").css('display', 'block');
 	drawGameBoard();
@@ -334,11 +386,11 @@ function startMultiPlayer(){
     $("#buttonMultiNext").prop('disabled', true);
     $("#buttonCheckResult").prop('disabled', true);
 
+
 }
 
 function showHighscore(){
-alert("highscore");
-//load highscore from server
+    $("#highscoreModal").modal('show');
 }
 
 /*
@@ -348,6 +400,15 @@ function drawGameBoard(){
 	//fadeIn all divs for the gameboard
     $("#button_area_bottom").fadeIn(0);
     $("#gameBoard").fadeIn(300);
+}
+
+function drawMainMenu(){
+    //fadeIn out divs for the gameboard
+    $("#button_area_bottom").fadeOut(0);
+    $("#gameBoard").fadeOut(300);
+    // fade in main menu
+    $("#button_area_top").fadeIn(300);
+    $("#main_page").fadeIn(300);
 }
 
 function setMasterCode(){

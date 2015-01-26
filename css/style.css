@@ -231,3 +231,8 @@ h1 {
     height: 15px;
     width: 15px;
 }
+
+/* ============ Modal ============== */
+.modal-mi{
+    width: 400px;
+}
