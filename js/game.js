@@ -12,9 +12,8 @@ var round = 0;
 var masterCodeIsSet = false;
 var multiplayer = false;
 var masterCodeViewable = false;
-
- 
-
+var highscore = new Array();
+var finished = false;
 
 $(function() {
 	
@@ -53,10 +52,12 @@ $(function() {
             startMultiPlayer();
         }
         else {
+			finished = false;
             startSinglePlayer();
         }
     });
     $("#buttonMainMenu").on("click", function () {
+		finished = false;
         drawMainMenu();
     });
     $("#buttonSetMasterCode").on( "click", function () {
@@ -174,6 +175,8 @@ function checkResult() {
                 $("#buttonCheckResult").fadeOut(0);
                 $(".buttonsfinishedGame").css('display', 'inline-block');
                 alert("Korrekt! Du hast "+round+" Versuche gebraucht!");
+				finished = true;
+				showHighscore();
                 return;
             }
             // if the result is wrong and 10 rounds are played -> player lose
@@ -415,7 +418,52 @@ function startMultiPlayer(){
 }
 
 function showHighscore(){
+	loadLocalHighscore();
     $("#highscoreModal").modal('show');
+}
+
+function loadLocalHighscore(){
+	var localHighscoreStore = localStorage.getItem('highscore');
+	
+	if(localHighscoreStore){
+		highscore = JSON.parse(localHighscoreStore);
+	}
+	//push current score if game ends
+	if(finished){
+		highscore.push(new Array("",round));
+		$("#highscoreSave").show();
+	}
+	//sort by time in nested arrays
+	if(localHighscoreStore){
+	highscore.sort((function(index){
+			return function(a, b){
+				return (a[index] === b[index] ? 0 : (a[index] < b[index] ? -1 : 1));
+			};
+		})(1)); 
+	}
+	//clear the content
+	$("#highscoreModalBody").html("");
+	//fill rows
+	$.each(highscore,function(index){
+		if(highscore[index][0] == "" && finished)
+			$("#highscoreModalBody").append("<div style=\"width:300px;\"><div class=\"highscoreRowInner\"><input type=\"text\" id=\"highscoreName\" /></div><div class=\"highscoreRowInner\">"+highscore[index][1]+"</div></div>");
+		else
+			$("#highscoreModalBody").append("<div style=\"width:300px;\"><div class=\"highscoreRowInner\">"+highscore[index][0]+"</div><div class=\"highscoreRowInner\">"+highscore[index][1]+"</div></div>");
+	});
+	
+}
+
+function saveHighscore(){
+	$.each(highscore,function(index){
+		if(highscore[index][0] == ""){
+			highscore[index][0] = $("#highscoreName").val();	
+		}
+	});
+	console.log("save",highscore);
+	localStorage.setItem('highscore', JSON.stringify(highscore));
+	$("#highscoreModal").modal('hide');
+	$("#highscoreSave").hide();
+	finished = false;
 }
 
 /*

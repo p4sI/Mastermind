@@ -300,3 +300,14 @@ margin: 0 0 10px;
 .modal-mi{
     width: 400px;
 }
+
+/* highscore */
+.highscoreRowInner{
+	float: left;
+	width: 150px;
+	height: 30px;
+}
+
+#highscoreName{
+	width: 120px;
+}
