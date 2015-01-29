@@ -84,6 +84,17 @@ margin: 0 0 10px;
 	text-align: center;
 }
 
+/* ============= next round button ============ */
+
+.next_round .btn-group .btn {
+width: 100%;
+}
+
+.next_round .btn-group {
+width: 49.5%;
+}
+
+
 /* ============= additional button / section help ============ */
 
 #additional_button {
