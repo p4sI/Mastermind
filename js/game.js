@@ -446,9 +446,9 @@ function loadLocalHighscore(){
 	//fill rows
 	$.each(highscore,function(index){
 		if(highscore[index][0] == "" && finished)
-			$("#highscoreModalBody").append("<div style=\"width:300px;\"><div class=\"highscoreRowInner\"><input type=\"text\" id=\"highscoreName\" /></div><div class=\"highscoreRowInner\">"+highscore[index][1]+"</div></div>");
+			$("#highscoreModalBody").append("<div style=\"width:300px;height:25px;\"><div class=\"highscoreRowInner\"><input type=\"text\" id=\"highscoreName\" /></div><div class=\"highscoreRowInner\">"+highscore[index][1]+"</div></div>");
 		else
-			$("#highscoreModalBody").append("<div style=\"width:300px;\"><div class=\"highscoreRowInner\">"+highscore[index][0]+"</div><div class=\"highscoreRowInner\">"+highscore[index][1]+"</div></div>");
+			$("#highscoreModalBody").append("<div class=\"highscoreRow\" ><div class=\"highscoreRowInner\">"+highscore[index][0]+"</div><div class=\"highscoreRowInner\">"+highscore[index][1]+"</div></div>");
 	});
 	
 }

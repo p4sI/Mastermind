@@ -95,6 +95,9 @@ width: 49.5%;
 }
 
 
+
+
+
 /* ============= additional button / section help ============ */
 
 #additional_button {
@@ -312,11 +315,42 @@ margin: 0 0 10px;
     width: 400px;
 }
 
-/* highscore */
+/* ============= highscore ============ */
+
+#highscorehead {
+	border-bottom: 1px solid;
+    height: 30px;
+    font-weight: bold;
+    margin: 5px 30px 0;
+}
+
+.highscoreuser {
+	float: left;
+    text-align: center;
+    width: 50%;
+}
+
+.highscorerounds {
+	float: left;
+    text-align: center;
+    width: 50%;
+}
+
+#highscoreModalBody {
+	margin: 0 0 25px;
+    padding: 15px 15px 0;
+}
+
+.highscoreRow {
+	height: 25px;
+	width: 100%;
+}
+
 .highscoreRowInner{
 	float: left;
-	width: 150px;
-	height: 30px;
+    height: 30px;
+    text-align: center;
+    width: 50%;
 }
 
 #highscoreName{
