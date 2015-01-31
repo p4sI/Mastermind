@@ -26,7 +26,10 @@ $(function() {
 			},function(){
 			$(".game_guide").css("display","none");	
 	});
-	
+
+    $('#highscoreModal').on('hidden.bs.modal', function (e) {
+        $('#highscoreModalLabel').text("Highscore");
+    })
 	
 	$("#buttonSingle").on( "click", function () {
         startSinglePlayer();
@@ -174,7 +177,8 @@ function checkResult() {
                 // change the buttons at the bottom
                 $("#buttonCheckResult").fadeOut(0);
                 $(".buttonsfinishedGame").css('display', 'inline-block');
-                alert("Korrekt! Du hast "+round+" Versuche gebraucht!");
+                //alert("Korrekt! Du hast "+round+" Versuche gebraucht!");
+                $("#highscoreModalLabel").text("Korrekt! Du hast "+round+" Versuche gebraucht!");
 				finished = true;
 				showHighscore();
                 return;
@@ -188,7 +192,9 @@ function checkResult() {
                 $("#buttonCheckResult").fadeOut(0);
                 $(".buttonsfinishedGame").css('display', 'inline-block');
 
-                alert("Spielende. Du hast nach 10 Runden den Code noch nicht erraten!");
+                //alert("Spielende. Du hast nach 10 Runden den Code noch nicht erraten!");
+                $("#highscoreModalLabel").text("Spielende. Du hast nach 10 Runden den Code noch nicht erraten!");
+                showHighscore();
                 return;
             }
 
@@ -402,6 +408,9 @@ function startMultiPlayer(){
         helper: "clone"
     });
 
+    // display draggable keypegs
+    $("#multi_row_keypeg").css('display', 'block');
+
     // make the codepeg holes transparent
     $(".codepeg_circle_default, .codepeg_mastercode").css('background-color','transparent');
     //make the keypeg holes transparent
@@ -478,7 +487,7 @@ function drawGameBoard(){
 function drawMainMenu(){
     //fadeIn out divs for the gameboard
     $("#button_area_bottom").fadeOut(0);
-    $("#gameBoard").fadeOut(300);
+    $("#gameBoard").fadeOut(0);
     // fade in main menu
     $("#button_area_top").fadeIn(300);
     $("#main_page").fadeIn(300);
