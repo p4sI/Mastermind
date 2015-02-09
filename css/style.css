@@ -96,7 +96,26 @@ h1 {
 
 
 
+/* ============= main menu button ============ */
 
+#main_menu_button {
+	position: absolute;
+    left: 7px;
+    top: 3px;
+    display: none;
+}
+#menu_button ul {
+	margin: 0;
+    padding: 5px;
+}
+#menu_button li {
+	cursor: pointer;
+	display: inline;
+    list-style-image: none;
+    list-style-type: none;
+    margin: 0 5px;
+    font-size: 25px;
+}
 
 /* ============= additional button / section help ============ */
 

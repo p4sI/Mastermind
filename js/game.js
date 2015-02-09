@@ -176,7 +176,7 @@ function checkResult() {
                 toggleMasterCode();
                 // change the buttons at the bottom
                 $("#buttonCheckResult").fadeOut(0);
-                $(".buttonsfinishedGame").css('display', 'inline-block');
+               // $(".buttonsfinishedGame").css('display', 'inline-block');
                 //alert("Korrekt! Du hast "+round+" Versuche gebraucht!");
                 $("#highscoreModalLabel").text("Korrekt! Du hast "+round+" Versuche gebraucht!");
 				finished = true;
@@ -190,7 +190,7 @@ function checkResult() {
                 $("#multi_row_codepeg").css('background-color','#C18553');
                 // change the buttons at the bottom
                 $("#buttonCheckResult").fadeOut(0);
-                $(".buttonsfinishedGame").css('display', 'inline-block');
+                //$(".buttonsfinishedGame").css('display', 'inline-block');
 
                 //alert("Spielende. Du hast nach 10 Runden den Code noch nicht erraten!");
                 $("#highscoreModalLabel").text("Spielende. Du hast nach 10 Runden den Code noch nicht erraten!");
@@ -318,6 +318,9 @@ function startSinglePlayer(){
     
     //fadein additional_button
 	$("#additional_button").css('display', 'block');
+	
+	//fadein main_menu_button
+	$("#main_menu_button").css('display', 'block');
 
     //fadeout menu
     $("#button_area_top").fadeOut(0);
@@ -385,6 +388,9 @@ function startMultiPlayer(){
 	//fadein additional_button
 	$("#additional_button").css('display', 'block');
 
+	//fadein main_menu_button
+	$("#main_menu_button").css('display', 'block');
+	
     // fadeout menu
     $("#button_area_top").fadeOut(0);
     $("#main_page").fadeOut(0);
