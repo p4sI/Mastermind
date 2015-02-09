@@ -61,6 +61,7 @@ $(function() {
     });
     $("#buttonMainMenu").on("click", function () {
 		finished = false;
+		multiplayer = false;
         drawMainMenu();
     });
     $("#buttonSetMasterCode").on( "click", function () {
@@ -315,6 +316,9 @@ function checkDroppedColorMaster(ui, that) {
 function startSinglePlayer(){
     round = 0;
     multiplayer = false;
+	$("#multi_row_keypeg").css('display', 'none');
+	$("#multiplayer_buttons").css('display', 'none');
+	$("#buttonCheckResult").prop('disabled', false);
     
     //fadein additional_button
 	$("#additional_button").css('display', 'block');
@@ -384,6 +388,9 @@ function startMultiPlayer(){
     masterCodeIsSet = false;
     multiplayer = true;
     masterCodeViewable = false;
+	
+	$(".codepeg_mastercode").css('display', 'block');
+    $("#multi_row_codepeg").css('background-color','#C18553');
 	
 	//fadein additional_button
 	$("#additional_button").css('display', 'block');
